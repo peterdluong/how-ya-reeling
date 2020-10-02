@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta property="og:title" content="How Ya Reeling?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://img1.looper.com/img/gallery/things-only-adults-notice-in-shrek/intro-1573597941.jpg"/>
+  <!-- <meta property="og:image" content="resources/SiteLogo.png"> -->
+  <meta property="og:description" content="Don't know what to watch? How Ya Reeling will recomend you movies based on your emotions!">
+  
+  <title>How Ya Reeling? - CSCE315 Team 10</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/shop-homepage.css" rel="stylesheet">
+
+  <!-- Custom Defined CSS -->
+  <link href="movie_cards.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+
+  <link rel="icon" href="resources/SiteLogo.png">
+  
+</head>
+
+<body>
+  <!-- #59040A -->
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(110, 6, 13, 0.76);">
+    <div class="container">
+      <a class="navbar-brand" style="color: aliceblue; font-size: 25px;">How Ya Reeling?</a>
+      <ul class="nav navbar-nav navbar-right" style="color: white">
+        <li>
+          <a class="btn btn-primary" onclick="toggleDyslexiaMode()" role="button">Accessibility</a>
+          <a class="btn btn-primary" onclick="openIntroModal()" role="button">How to Use</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="introModal" tabindex="-1" role="dialog" aria-labelledby="introModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="introModalLabel">Intro</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4>What is How-Ya-Reeling?</h4>
+            <p>
+              How-Ya-Reeling recomends movies based on your emotions!
+              <br><br>
+              To use:
+            </p>
+            <ol>
+              <li>Click on <b>Take a Picture</b> to take a Picture</li>
+              <li>Wait for How-Ya-Reeling? to predict your emotions recomend you movies to watch</li>
+              <li>Select a movie you would like to watch</li>
+              <li>Enjoy!</li>
+            </ol>
+          </div>
+          <div class="modal-footer">
+            <div class="form-check">
+
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="neverShowCheckbox">
+                <label class="custom-control-label" for="neverShowCheckbox">Don't show this again</label>
+              </div>
+                            
+              <!-- <input type="checkbox" class="form-check-input" id="neverShowCheckbox"> -->
+              <!-- <label class="form-check-label" style="font-size: small;" for="exampleCheck1">Never show this again</label> -->
+            </div>
+            <button type="button" class="btn btn-primary" onclick="closeIntroModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <!-- <h1 class="my-4">Shop Name</h1> -->
+
+        <div class="my-4">
+          <img class="card-img-top main-logo mx-auto d-block" src="resources/SiteLogo.png">
+        </div>
+        
+        <div class="card h-15 my-4">
+          <img id="faceImg" class="card-img-top" src="http://swaleswillis.co.uk/wp-content/uploads/2017/04/face-placeholder-300x300.gif">
+          <br>
+          <h3 style="padding-left: 9px;">You are feeling: &#128512</h3>
+            <a onclick="changeSampleImg()" button type="button" class="btn btn-primary btn-sm" style="padding: 5% 0;">Take a Picture</button> </a>
+            <script>
+              let cntr = 0;
+              function changeSampleImg()
+              {
+                cntr = cntr + 1;
+                strUrl = "https://picsum.photos/300?filler=";
+                document.getElementById("faceImg").src = strUrl.concat(cntr);
+              }
+            </script>
+        </div>
+
+      </div>
+      <!-- /.col-lg-3 -->
+
+      
+      <div class="col-lg-9">
+
+        <div class="row">
+          <br>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#">
+                  <img class="card-img-top movie_card" src="resources/avengers_endgame.jpg" onload="this.onload=null; this.src=getTrendingMovieIMG(0);" alt="">
+                </a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="#"><script>document.write("Star Wars")</script></a>
+                  </h4>
+                  <a href="https://www.netflix.com/search?q=avengers%20endgame" button type="button" class="btn btn-danger btn-sm">Netflix</button>
+                  </a>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+                </div>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#">
+                <img class="card-img-top movie_card" src="resources/avengers_endgame.jpg" onload="this.onload=null; this.src=getTrendingMovieIMG(1);" alt="">
+              </a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">Frozen II</a>
+                </h4>
+                <a href="https://www.fandango.com/frozen-ii-185800/movie-overview" button type="button" class="btn btn-primary btn-sm">Fandango</button>
+                </a>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+              </div>
+            </div>
+        </div>
+          
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="#">
+              <img class="card-img-top movie_card" src="resources/avengers_endgame.jpg" onload="this.onload=null; this.src=getTrendingMovieIMG(2);" alt="">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Frozen II</a>
+              </h4>
+              <a href="https://www.fandango.com/frozen-ii-185800/movie-overview" button type="button" class="btn btn-primary btn-sm">Fandango</button>
+              </a>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+            </div>
+          </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <a href="#">
+            <img class="card-img-top movie_card" src="resources/avengers_endgame.jpg" onload="this.onload=null; this.src=getTrendingMovieIMG(3);" alt="">
+          </a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Frozen II</a>
+            </h4>
+            <a href="https://www.fandango.com/frozen-ii-185800/movie-overview" button type="button" class="btn btn-primary btn-sm">Fandango</button>
+            </a>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+          </div>
+        </div>
+    </div>
+      
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <a href="#">
+            <img class="card-img-top movie_card" src="resources/avengers_endgame.jpg" onload="this.onload=null; this.src=getTrendingMovieIMG(4);" alt="">
+          </a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#">Avengers Endgame</a>
+            </h4>
+            <a href="https://www.netflix.com/search?q=avengers%20endgame" button type="button" class="btn btn-danger btn-sm">Netflix</button>
+            </a>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+          </div>
+        </div>
+    </div>
+
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+      <a href="#">
+        <img class="card-img-top movie_card" src="resources/avengers_endgame.jpg" onload="this.onload=null; this.src=getTrendingMovieIMG(5);" alt="">
+      </a>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="#">Frozen II</a>
+        </h4>
+        <a href="https://www.fandango.com/frozen-ii-185800/movie-overview" button type="button" class="btn btn-primary btn-sm">Fandango</button>
+        </a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+      </div>
+    </div>
+  </div>
+
+          
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  
+  <!-- Footer -->
+  <footer class="py-4 panel-footer panel-custom">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; How Ya Reeling? 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="index.js"></script>"
+
+  
+  
+</body>
+
+</html>

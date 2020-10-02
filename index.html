@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta property="og:title" content="How Ya Reeling?" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://img1.looper.com/img/gallery/things-only-adults-notice-in-shrek/intro-1573597941.jpg"/>
+  <!-- <meta property="og:image" content="resources/SiteLogo.png"> -->
+  <meta property="og:description" content="Don't know what to watch? How Ya Reeling will recomend you movies based on your emotions!">
+  
+  <title>How Ya Reeling? - CSCE315 Team 10</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/shop-homepage.css" rel="stylesheet">
+
+  <!-- Custom Defined CSS -->
+  <link href="movie_cards.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+
+  <link rel="icon" href="resources/SiteLogo.png">
+  
+</head>
+
+<!-- <body onload="constructMoviesPage()"> -->
+<body id="pageBody" onload="constructMoviesPage(); updateFont()">
+
+  <!-- <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(35, 35, 35);">
+  </div> -->
+  
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  
+  <!-- #59040A -->
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(110, 6, 13, .95);">
+    <div class="container">
+      <a class="navbar-brand" style="color: aliceblue; font-size: 25px;" href="#site-logo">How Ya Reeling?</a>
+      <ul class="nav navbar-nav navbar-right" style="color: white">
+        <li>
+      
+          <a class="btn btn-primary" onclick="openAccessibilityModal()" role="button" >Additional Features</a>
+          <a class="btn btn-primary" onclick="openIntroModal()" role="button" style="margin-left: 7px;">How to Use</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+  
+
+
+  <!-- Page Content -->
+  <div class="container">
+    
+    <!-- Modal -->
+    <!-- Introduction and How to Use Modal -->
+    <div class="modal fade" id="introModal" tabindex="-1" role="dialog" aria-labelledby="introModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h3 style="text-align: center;">What is How-Ya-Reeling?</h3>
+            <br>
+            <p style="text-align: center">
+              Welcome! We are a web service designed to assist you with deciding what movies to watch!
+              <br><br>
+              We use secure facial imaging technology to help you choose the perfect movie for any mood.
+            </p>
+            <p>
+              To use:
+            </p>
+            <ol>
+              <li>Click on <b>Take a Picture</b> to take or upload a picture of your self</li>
+              <li>Wait for How-Ya-Reeling? to predict your mood and recommend you movies to watch</li>
+              <li>Check out our Features and Filters for more ways to customize your experience</li>
+              <li>Select a movie you would like to watch</li>
+              <li>Enjoy!</li>
+            </ol>
+
+            <br>
+            
+            <div class="custom-control custom-checkbox" style="text-align: center;">
+              <input type="checkbox" class="custom-control-input" id="neverShowCheckbox">
+              <label class="custom-control-label" for="neverShowCheckbox">Don't show this again</label>
+            </div>
+            
+            <div style="text-align: center; margin-top: 5px; padding-left: 10px; padding-right: 10px">
+              <button type="button" class="btn btn-primary btn-block" style="margin-top: 7px;" onclick="closeIntroModal()">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Taking a Picture Modal -->
+    <div class="modal fade" id="pictureModal" tabindex="-1" role="dialog" aria-labelledby="pictureModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h3 style="text-align: center;">Take a Picture</h3>
+           
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <!-- <span class="input-group-text" id="inputGroupPictureAddon">Upload</span> -->
+                </div>
+                <div class="custom-file">
+                  <input type="file" accept="image/*;capture=camera" class="custom-file-input" id="inputGroupPicture"
+                    aria-describedby="inputGroupPictureAddon">
+                  <label class="custom-file-label" for="inputGroupPicture">Take picture</label>
+                </div>
+
+                
+                <button onclick="uploadPhoto()" type="button" class="btn btn-success" style="margin-left: 3px;">Submit</button>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <div id="uploading-image" class="lds-ellipsis d-none"><div></div><div></div><div></div><div></div></div> 
+              </div>
+
+              
+            <div style="text-align: center; margin-top: -5px; padding-left: 10px; padding-right: 10px">
+              <button type="button" class="btn btn-primary btn-block" style="padding: 10px 80px; margin-top: 7px;"
+                data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+        <!-- Features Modal -->
+        <div class="modal fade" id="accessibilityModal" tabindex="-1" role="dialog" aria-labelledby="accessibilityModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h3 style="text-align: center;">Additional Features</h3>
+                <br>
+                   
+                <div class="custom-control custom-switch" data-toggle="tooltip" data-placement="right" title="Change the font for easier reading">
+                  <input type="checkbox" class="custom-control-input" id="dyslexiaEnableCheckbox" onchange="setDyslexiaByAccessibility()">
+                  <label class="custom-control-label" for="dyslexiaEnableCheckbox">Enable Easy-Reading Font</label>
+                </div>
+                
+                <div class="custom-control custom-switch" data-toggle="tooltip" data-placement="right" title="Enter the password to enable">
+                  <input type="checkbox" class="custom-control-input" disabled id="utellyEnableCheckbox" onchange="toggleUtelly()">
+                  <label class="custom-control-label" for="utellyEnableCheckbox">Enable Utelly API</label>
+                </div>
+                
+                <div class="custom-control custom-switch"  data-toggle="tooltip" data-placement="right" title="Enter the password to enable">
+                  <input type="checkbox" class="custom-control-input" disabled id="visionEnableCheckbox" onchange="updateUserMood()">
+                  <label class="custom-control-label" for="visionEnableCheckbox">Enable Mood Detection</label>
+                </div>
+
+                <div>
+                  <button style="outline-color: red; height: auto; width: 27px;" type="button" class="btn btn-outline-secondary" onclick="clearWatchedMovies()"></button>
+                  <label style=" padding-left: 5px;">Clear Watch History</label>
+                </div>
+
+                <hr class="solid">
+                
+                <form id="featurePasswordForm">
+                  <div class="form-group">
+                    <input type="password" class="form-control" id="inputPassword" aria-describedby="passswordHelp"
+                      placeholder="Enter password">
+                  </div>
+                  
+                  <button type="button" class="btn btn-success" onclick="checkForAPIPassword()">Enter</button>
+
+                </form>
+                
+              </div>
+              
+            </div>
+          </div>
+        </div>
+    
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <!-- <h1 class="my-4">Shop Name</h1> -->
+
+        <div class="my-4">
+          <img id="site-logo" class="card-img-top main-logo mx-auto d-block" src="resources/SiteLogo.png">
+        </div>
+        
+        <div class="card h-15 my-4" style="margin: auto; ">
+          <img id="faceImg" class="card-img-top"
+            src="http://swaleswillis.co.uk/wp-content/uploads/2017/04/face-placeholder-300x300.gif">
+          <br>
+          <div id="emotion-container">
+            <h3 id="user-emotion" style="padding-left: 9px;">You are feeling:</h3>
+            <h7> No camera? No problem!</h7>
+            <select id="emotion-emoji" class="js-example-basic-single" name="state" onchange="updateMoodFromDropdown()">
+              <option value="meh">😐</option>
+              <option value="joy">😀</option>
+              <option value="sorrow">😭</option>
+              <option value="surprise">😮</option>
+              <option value="anger">😡</option>
+            </select>
+          </div>
+          <a onclick="openTakePictureModal()" button type="button" class="btn btn-primary btn-sm"
+            style="padding: 5% 0; color: white; font-size: 18px;">Take a Picture </a>
+        </div>
+        
+        <!-- Show Watch History -->
+
+        <div>
+          <h1 id="trendingButton" onclick="constructTrendingMoviesPage()" button type="button" class="btn btn-secondary btn-sm" style="padding: 5% 0; color: white; width: 100%; font-size: 18px;">View Trending Movies</h1>
+        </div>
+
+        <div>
+          <h1 id="recommendedButton" onclick="viewMovieSuggestions()" button type="button" class="btn btn-secondary btn-sm" style="padding: 5% 0; color: white; width: 100%; margin-top: 15px; font-size: 18px;">View Recommended Movies</h1>
+        </div>
+
+        <div>
+          <h1 id="watchedButton" onclick="viewWatchHistory()" button type="button" class="btn btn-secondary btn-sm" style="padding: 5% 0; color: white; width: 100%; margin-top: 15px; font-size: 18px;">View Watch History</h1>
+        </div>
+
+      </div>
+      <!-- /.col-lg-3 -->
+    
+      <div class="col-lg-9">
+    
+        <div class="row">
+          <h2 style="color:white; margin-top: 15px; margin-right: auto; margin-left: 15px; padding-right: 80px" id="p"></h2>
+          <div style="margin-top: 20px; margin-right: 15px;">
+            <button class="btn btn-danger" type="button" onclick="clearFilters()">Clear Filters</button>
+          </div>
+          <div style="margin-top: 20px; margin-bottom: 10px; margin-right: 15px;" class="dropdown float-right">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filters
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a style="margin-left: 5px" href="#" onclick="showMoviesInTheaters();">In theaters</a></li>
+              <li><a style="margin-left: 5px" href="javascript:showMoviesOnNetflix();">Netflix</a></li>
+              <li><a style="margin-left: 5px" href="javascript:showMoviesOnAmazon();">Amazon</a></li>
+              <li><a style="margin-left: 5px" href="javascript:showMoviesOnItunes();">iTunes</a></li>
+			  <li><a style="margin-left: 5px" href="javascript:showMoviesOnGooglePlay();">Google Play</a></li>
+              <!-- <li><a style="margin-left: 5px" href="#">Family Friendly</a></li> -->
+            </ul>
+          </div>
+          <br>
+        </div>
+    
+    
+        <div id="moviesPage" class="row">
+
+          <!-- THIS IS WHERE THE MOVIES WILL POP UP FROM THE FUNCTIONS!!! -->
+          <!-- I TOOK OUT ALL THE DIVS THAT WERE PREVIOUSLY HERE!!! -->
+
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  
+  <!-- Footer -->
+  <footer class="py-4 panel-footer panel-custom">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; How Ya Reeling? 2020</p>
+    </div>
+  <div class="container">
+    <p class="m-0 text-center text-white">
+    Powered by
+    <a href="https://www.themoviedb.org/?language=en-US">
+    <img style="width:30px; height:25px" src="resources/tmdb_rating.svg" alt="The Movie Database Logo">
+    </a>
+    </p>
+  </div>
+    <div class="text-center">
+      <!-- Your share button code -->
+      <div class="fb-share-button" 
+        data-href="http://pi.cmasterx.com/" 
+        data-layout="button_count">
+      </div>
+      <div style="margin-top: 10px">
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="http://how-ya-reeling.cmasterx.com/" data-show-count="false">Tweet</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+      <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+      <script type="IN/Share" data-url="http://pi.cmasterx.com/"></script>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="index.js"></script>
+
+  
+  
+</body>
+
+</html>
